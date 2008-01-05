@@ -35,7 +35,7 @@ module Ardes #:nodoc:
       output
     
     rescue REXML::ParseException
-      truncate_html(Hpricot(input, :fixup_tags => true).to_html, length, omission)
+      truncate_html(Hpricot(input, :fixup_tags => true).to_html, length, ellipsis)
     end
     
   private
