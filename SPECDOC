@@ -1,0 +1,18 @@
+
+Ardes::TruncateHtmlHelper html: <p>Hello <strong>World</strong></p>, length: 
+- 3, should equal <p>Hel&hellip;</p>
+- 7, should equal <p>Hello <strong>W&hellip;</strong></p>
+- 11, should equal <p>Hello <strong>World</strong></p>
+
+Ardes::TruncateHtmlHelper html: <p>Hello &amp; <span class="foo">Goodbye</span> <br /> Hi</p>, length: 
+- 7, should equal <p>Hello &amp;&hellip;</p>
+- 9, should equal <p>Hello &amp; <span class="foo">G&hellip;</span></p>
+- 18, should equal <p>Hello &amp; <span class="foo">Goodbye</span> <br></br> H&hellip;</p>
+
+Ardes::TruncateHtmlHelper (incorrect) html: <p>Hello <strong>World</p><div>And Hi, length: 
+- 10, should equal <p>Hello <strong>Worl&hellip;</strong></p>
+- 30, should equal <p>Hello <strong>World</strong></p><div>And Hi</div>
+
+Finished in 0.091441 seconds
+
+8 examples, 0 failures

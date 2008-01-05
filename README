@@ -1,0 +1,25 @@
+http://plugins.ardes.com > truncate_html
+
+= truncate_html
+
+Ardes::TruncateHtml is just like the vanilla truncate rails helper, except it respects tags and html entities, and returns valid html.
+
+Rexml and HtmlEntities are used for the parsing.  If the input is invalid html, then hpricot is used to fix it up (but is not used when the input is fine).
+
+Inspired and heavily influenced by http://mikeburnscoder.wordpress.com/2006/11/11/truncating-html-in-ruby/ and the links contained therein.
+
+=== Dependencies
+
+Requires the htmlentities and hpricot gems:
+
+  gem install htmlentities
+  gem install hpricot
+  
+=== Specs and Coverage
+* {SPECDOC}[link:files/SPECDOC.html] lists the specifications
+* {RSpec Report}[link:rspec_report.html] is a report of spec pass/fails
+* {RCov Report}[link:coverage/index.html] is the rcov report
+
+=== Testing
+RSpec is used for testing, so the tests are in <tt>spec/</tt> rather than
+<tt>test/</tt> Do rake --tasks for more details.
