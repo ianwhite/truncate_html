@@ -24,6 +24,7 @@ or - in your environment.rb file (>= rails 2.1)
 
 * The SPECDOC lists the specifications
 * Coverage is 100% (C2), and the spec suite is quite comprehensive
+* CI: tested against all 2.x branches and stable tags
 
 RSpec is used for testing, so the tests are in <tt>spec/</tt> rather than
 <tt>test/</tt> Do rake --tasks for more details.
