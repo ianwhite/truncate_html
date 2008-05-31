@@ -1,6 +1,6 @@
 require File.expand_path(File.join(File.dirname(__FILE__), '../spec_helper'))
 
-describe Ardes::TruncateHtmlHelper
+describe Ardes::TruncateHtmlHelper do
   include Ardes::TruncateHtmlHelper
   
   def self.with_length_should_equal(n, str)
