@@ -15,11 +15,20 @@ Requires the htmlentities and hpricot gems:
   gem install htmlentities
   gem install hpricot
   
-=== Specs and Coverage
-* {SPECDOC}[link:files/SPECDOC.html] lists the specifications
-* {RSpec Report}[link:rspec_report.html] is a report of spec pass/fails
-* {RCov Report}[link:coverage/index.html] is the rcov report
+or - in your environment.rb file (>= rails 2.1)
 
-=== Testing
+  config.gem "hpricot"
+  config.gem "htmlentities"
+  
+== Specs and Coverage
+
+* The SPECDOC lists the specifications
+* Coverage is 100% (C2), and the spec suite is quite comprehensive
+
 RSpec is used for testing, so the tests are in <tt>spec/</tt> rather than
 <tt>test/</tt> Do rake --tasks for more details.
+
+== Continuous Integration
+
+garlic (at http://github.com/ianwhite/garlic) is used for CI.  To run the CI suite have a look at
+garlic_example.rb
