@@ -23,7 +23,7 @@ or - in your environment.rb file (>= rails 2.1)
 == Specs and Coverage
 
 * The SPECDOC lists the specifications
-* Coverage is 100% (C2), and the spec suite is quite comprehensive
+* Coverage is 100% (C0)
 * CI: tested against all 2.x branches and stable tags
 
 RSpec is used for testing, so the tests are in <tt>spec/</tt> rather than
