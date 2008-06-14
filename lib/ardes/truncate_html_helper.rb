@@ -1,6 +1,6 @@
 require "rexml/parsers/pullparser"
-require "htmlentities"
-require "hpricot"
+require "htmlentities" rescue nil
+require "hpricot" rescue nil
 
 module Ardes #:nodoc:
   module TruncateHtmlHelper
