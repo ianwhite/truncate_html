@@ -9,7 +9,6 @@ describe Ardes::TruncateHtmlHelper do
     end
   end
   
-  
   describe "html: <p>Hello <strong>World</strong></p>, length: " do
     before { @html = '<p>Hello <strong>World</strong></p>' }
   
