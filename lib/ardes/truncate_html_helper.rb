@@ -1,12 +1,7 @@
 require "rexml/parsers/pullparser"
-
-begin
-  require 'rubygems'
-  require "htmlentities"
-  require "hpricot"
-rescue LoadError
-  puts "WARNING: htmlentities & hpricot gems are required for truncate_html plugin"
-end
+require 'rubygems'
+require "htmlentities"
+require "hpricot"
 
 module Ardes #:nodoc:
   module TruncateHtmlHelper
