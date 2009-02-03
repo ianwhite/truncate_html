@@ -5,6 +5,10 @@ require "hpricot"
 
 module Ardes #:nodoc:
   module TruncateHtmlHelper
+    # you may set this to either 'html4', or 'xhtml1'
+    mattr_accessor :flavor
+    self.flavor = 'html4'
+    
     # Truncates html respecting tags and html entities.
     #
     # The API is the same as ActionView::Helpers::TextHelper#truncate.  It uses Rexml for the parsing, and HtmlEntities for entity awareness.  If Rexml raises a ParseException, then Hpricot is used to fixup the tags, and we try again
@@ -18,30 +22,34 @@ module Ardes #:nodoc:
       length = options[:length] || args[0] || 30
       omission = options[:omission] || args[1] || '&hellip;'
       
-      parser = REXML::Parsers::PullParser.new(input)
-      tags, output, chars_remaining = [], '', length
+      begin
+        parser = REXML::Parsers::PullParser.new(input)
+        encoder = HTMLEntities.new(::Ardes::TruncateHtmlHelper.flavor)
+        tags, output, chars_remaining = [], '', length
       
-      while parser.has_next? && chars_remaining > 0
-        element = parser.pull
-        case element.event_type
-        when :start_element
-          output << rexml_element_to_tag(element)
-          tags.push element[0]
-        when :end_element
-          output << "</#{tags.pop}>"
-        when :text
-          text = HTMLEntities.decode_entities(element[0])
-          output << HTMLEntities.encode_entities(text.first(chars_remaining), :named, :basic)
-          chars_remaining -= text.length
-          output << omission if chars_remaining < 0
+        while parser.has_next? && chars_remaining > 0
+          element = parser.pull
+          case element.event_type
+          when :start_element
+            output << rexml_element_to_tag(element)
+            tags.push element[0]
+          when :end_element
+            output << "</#{tags.pop}>"
+          when :text
+            text = encoder.decode(element[0])
+            output << encoder.encode(text.first(chars_remaining))
+            chars_remaining -= text.length
+            output << omission if chars_remaining < 0
+          end
         end
-      end
       
-      tags.reverse.each {|tag| output << "</#{tag}>" }
-      output
+        tags.reverse.each {|tag| output << "</#{tag}>" }
+        output
     
-    rescue REXML::ParseException
-      truncate_html(Hpricot(input, :fixup_tags => true).to_html, :length => length, :omission => omission)
+      rescue REXML::ParseException
+        input = Hpricot(input, :fixup_tags => true).to_html
+        retry
+      end
     end
     
   private

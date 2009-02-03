@@ -47,4 +47,22 @@ describe Ardes::TruncateHtmlHelper do
       with_length_should_equal 30, '<p>Hello <strong>World</strong></p><div>And Hi</div>'
     end
   end
+  
+  it "should not convert ' to &apos; (html4 compat)" do
+    truncate_html("30's").should == "30's"
+  end
+  
+  describe "when Ardes::TruncateHtmlHelper.flavour = 'xhtml1'" do
+    before do
+      Ardes::TruncateHtmlHelper.flavor = 'xhtml1'
+    end
+    
+    after do
+      Ardes::TruncateHtmlHelper.flavor = 'html4'
+    end
+    
+    it "should convert ' to &apos;" do
+      truncate_html("30's").should == "30&apos;s"
+    end
+  end
 end
