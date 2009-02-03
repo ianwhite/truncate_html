@@ -1,15 +1,3 @@
-# This is for running specs against target versions of rails
-#
-# To use do
-#   - cp garlic_example.rb garlic.rb
-#   - rake get_garlic
-#   - [optional] edit this file to point the repos at your local clones of
-#     rails, rspec, and rspec-rails
-#   - rake garlic:all
-#
-# All of the work and dependencies will be created in the galric dir, and the
-# garlic dir can safely be deleted at any point
-
 garlic do
   repo 'truncate_html', :path => '.'
 
@@ -17,7 +5,8 @@ garlic do
   repo 'rspec', :url => 'git://github.com/dchelimsky/rspec'
   repo 'rspec-rails', :url => 'git://github.com/dchelimsky/rspec-rails'
 
-  ['origin/2-2-stable', 'origin/2-1-stable', 'origin/2-0-stable'].each do |rails|
+  # 2-0-stable is out at the moment, because there's a problem running rspec with it
+  ['origin/master', 'origin/2-2-stable', 'origin/2-1-stable'].each do |rails|
     target "Rails: #{rails}", :tree_ish => rails do
       prepare do
         plugin 'truncate_html', :clone => true
