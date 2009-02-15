@@ -5,9 +5,8 @@ garlic do
   repo 'rspec', :url => 'git://github.com/dchelimsky/rspec'
   repo 'rspec-rails', :url => 'git://github.com/dchelimsky/rspec-rails'
 
-  # 2-0-stable is out at the moment, because there's a problem running rspec with it
-  ['origin/master', 'origin/2-2-stable', 'origin/2-1-stable'].each do |rails|
-    target "Rails: #{rails}", :tree_ish => rails do
+  ['master', '2-2-stable', '2-1-stable', '2-0-stable'].each do |rails|
+    target rails, :tree_ish => "origin/#{rails}" do
       prepare do
         plugin 'truncate_html', :clone => true
         plugin 'rspec'
