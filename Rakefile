@@ -37,25 +37,17 @@ begin
   require 'garlic/tasks'
   require 'grancher/task'
   
-  RepoSha = `git log -1 --pretty=format:"%h"`
-  DocSha = File.read('doc/index.html').match(/<title>.*?\((\w{7})\)<\/title>/m)[1] rescue nil
+  task :cruise => ['garlic:all', 'doc:publish']
   
-  task :cruise => ['garlic:all', 'doc:publish_new']
-  task :doc => 'doc:build'
+  Rake::RDocTask.new(:doc) do |d|
+    d.rdoc_dir = 'doc'
+    d.main     = 'README.rdoc'
+    d.title    = "#{PluginName} API Docs"
+    d.rdoc_files.include('README.rdoc', 'History.txt', 'License.txt', 'Todo.txt', 'lib/**/*.rb')
+  end
 
   namespace :doc do
-    task :publish_new do
-      Rake::Task['doc:publish'].invoke if DocSha != RepoSha
-    end
-    
-    Rake::RDocTask.new(:build) do |d|
-      d.rdoc_dir = 'doc'
-      d.main     = 'README.rdoc'
-      d.title    = "#{PluginName} API Docs (#{RepoSha})"
-      d.rdoc_files.include('README.rdoc', 'History.txt', 'License.txt', 'Todo.txt', 'lib/**/*.rb')
-    end
-  
-    Grancher::Task.new(:publish => 'doc:build') do |g|
+    Grancher::Task.new(:publish => 'doc') do |g|
       g.keep 'index.html'
       g.directory 'doc', 'doc'
       g.branch = 'gh-pages'
