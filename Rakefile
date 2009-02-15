@@ -48,7 +48,7 @@ begin
 
   namespace :doc do
     Grancher::Task.new(:publish => 'doc') do |g|
-      g.keep 'index.html'
+      g.keep 'index.html', '.gitignore'
       g.directory 'doc', 'doc'
       g.branch = 'gh-pages'
       g.push_to = 'origin'
