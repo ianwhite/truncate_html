@@ -1,6 +1,4 @@
-http://plugins.ardes.com > truncate_html
-
-= truncate_html
+= {ianwhite}[http://github.com/ianwhite] / {truncate_html}[http://github.com/truncate_html]
 
 Ardes::TruncateHtml is just like the vanilla truncate rails helper, except it respects tags and html entities, and returns valid html.
 
@@ -24,7 +22,7 @@ or - in your environment.rb file (>= rails 2.1)
 
 * The SPECDOC lists the specifications
 * Coverage is 100% (C0)
-* CI: tested against all 2.x branches and stable tags
+* CI: tested against all 2.x branches
 
 RSpec is used for testing, so the tests are in <tt>spec/</tt> rather than
 <tt>test/</tt> Do rake --tasks for more details.
