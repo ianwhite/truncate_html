@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+  <head>
+    <title>File: README.rdoc [truncate_html API Docs (e96a73a)]</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <link href='.././rdoc-style.css' media='screen' rel='stylesheet' type='text/css'>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function popupCode(url) {
+          window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+        }
+        
+        function toggleCode(id) {
+          var code = document.getElementById(id)
+        
+          code.style.display = code.style.display != 'block' ? 'block' : 'none'
+          return true
+        }
+        
+        // Make codeblocks hidden by default
+        document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+      //]]>
+    </script>
+  </head>
+  <body class='page'>
+    <div class='file' id='wrapper'>
+      <div class='header'>
+        <div class='name'>README.rdoc</div>
+        <div class='paths'>
+          README.rdoc
+        </div>
+        <div class='last-update'>
+          Last Update:
+          <span class='datetime'>Sun Feb 15 11:13:59 +0000 2009</span>
+        </div>
+      </div>
+      <div id='content'>
+        <div id='text'>
+          <div id='description'>
+            <h1><a href="http://github.com/ianwhite">ianwhite</a> / <a href="http://github.com/ianwhite/truncate_html">truncate_html</a></h1>
+            <p>
+            TruncateHtml is just like the vanilla truncate rails helper, except it
+            respects tags and html entities, and returns valid html.
+            </p>
+            <p>
+            Rexml and HtmlEntities are used for the parsing. If the input is invalid
+            html, then hpricot is used to fix it up (but is not used when the input is
+            fine).
+            </p>
+            <p>
+            Inspired and heavily influenced by <a
+            href="http://mikeburnscoder.wordpress.com/2006/11/11/truncating-html-in-ruby">mikeburnscoder.wordpress.com/2006/11/11/truncating-html-in-ruby</a>/
+            and the links contained therein.
+            </p>
+            <h3>Dependencies</h3>
+            <p>
+            Requires the htmlentities and hpricot gems:
+            </p>
+            <pre>gem install htmlentities&#x000A;gem install hpricot</pre>
+            <p>
+            or - in your environment.rb file (>= rails 2.1)
+            </p>
+            <pre>config.gem &quot;hpricot&quot;&#x000A;config.gem &quot;htmlentities&quot;</pre>
+            <h2>Specs and Coverage</h2>
+            <ul>
+            <li>The SPECDOC lists the specifications
+            
+            </li>
+            <li>Coverage is 100% (C0)
+            
+            </li>
+            <li>CI: tested against all 2.x branches
+            
+            </li>
+            </ul>
+            <p>
+            RSpec is used for testing, so the tests are in <tt>spec/</tt> rather than
+            <tt>test/</tt> Do rake &#8212;tasks for more details.
+            </p>
+            <h2>Continuous Integration</h2>
+            <p>
+            garlic (at <a
+            href="http://github.com/ianwhite/garlic">github.com/ianwhite/garlic</a>) is
+            used for CI. To run the CI suite have a look at garlic_example.rb
+            </p>
+          </div>
+          <div id='section'>
+          </div>
+        </div>
+      </div>
+      <div id='footer-push'></div>
+    </div>
+    <div id='footer'>
+      <a href="http://github.com/mislav/hanna/tree/master"><strong>Hanna</strong> RDoc template</a>
+    </div>
+  </body>
+</html>
