@@ -31,13 +31,13 @@
         </div>
         <div class='last-update'>
           Last Update:
-          <span class='datetime'>Sun Feb 15 14:03:29 +0000 2009</span>
+          <span class='datetime'>Sun Feb 15 14:46:41 +0000 2009</span>
         </div>
       </div>
       <div id='content'>
         <div id='text'>
           <div id='description'>
-            <h1><a href="http://github.com/ianwhite">ianwhite</a> / <a href="http://github.com/ianwhite/truncate_html">truncate_html</a></h1>
+            <h1><a href="http://github.com/ianwhite">ianwhite</a> / <a href="http://github.com/ianwhite/truncate_html">truncate_html</a> ><a href="http://ianwhite.github.com/truncate_html">info</a> ><a href="http://ianwhite.github.com/truncate_html/doc">api</a></h1>
             <p>
             TruncateHtml is just like the vanilla truncate rails helper, except it
             respects tags and html entities, and returns valid html.
@@ -49,12 +49,25 @@
             </p>
             <p>
             Inspired and heavily influenced by <a
-            href="http://mikeburnscoder.wordpress.com/2006/11/11/truncating-html-in-ruby">mikeburnscoder.wordpress.com/2006/11/11/truncating-html-in-ruby</a>/
-            and the links contained therein.
+            href="http://mikeburnscoder.wordpress.com/2006/11/11/truncating-html-in-ruby/">this
+            article by Mike Burns</a> and the links contained therein.
             </p>
-            <h3>Dependencies</h3>
+            <h2>Usage</h2>
             <p>
-            Requires the htmlentities and hpricot gems:
+            when <tt>post.title</tt> is
+            </p>
+            <pre>&lt;p&gt;This is &lt;em&gt;my &lt;strong&gt;first&lt;/strong&gt; post&lt;/em&gt;&lt;/p&gt;</pre>
+            <p>
+            Then
+            </p>
+            <pre>&lt;%= truncate_html post.title, :length =&gt; 15 %&gt;</pre>
+            <p>
+            results in
+            </p>
+            <pre>&lt;p&gt;This is &lt;em&gt;my &lt;strong&gt;fir&amp;hellip;&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</pre>
+            <h2>Dependencies</h2>
+            <p>
+            Requires the <tt>htmlentities</tt> and <tt>hpricot</tt> gems:
             </p>
             <pre>gem install htmlentities&#x000A;gem install hpricot</pre>
             <p>
@@ -63,13 +76,10 @@
             <pre>config.gem &quot;hpricot&quot;&#x000A;config.gem &quot;htmlentities&quot;</pre>
             <h2>Specs and Coverage</h2>
             <ul>
-            <li>The SPECDOC lists the specifications
-            
-            </li>
             <li>Coverage is 100% (C0)
             
             </li>
-            <li>CI: tested against all 2.x branches
+            <li>CI: tested against all 2.x branches of rails
             
             </li>
             </ul>
@@ -77,11 +87,10 @@
             RSpec is used for testing, so the tests are in <tt>spec/</tt> rather than
             <tt>test/</tt> Do rake &#8212;tasks for more details.
             </p>
-            <h2>Continuous Integration</h2>
             <p>
-            garlic (at <a
-            href="http://github.com/ianwhite/garlic">github.com/ianwhite/garlic</a>) is
-            used for CI. To run the CI suite have a look at garlic_example.rb
+            <a href="http://github.com/ianwhite/garlic">garlic</a> is used for CI. To
+            see what versions are tested against see <a
+            href="http://github.com/ianwhite/truncate_html/blob/master/garlic.rb">garlic.rb</a>
             </p>
           </div>
           <div id='section'>
