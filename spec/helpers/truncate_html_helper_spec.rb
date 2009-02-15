@@ -54,15 +54,19 @@ describe TruncateHtmlHelper do
   
   describe "when TruncateHtmlHelper.flavour = 'xhtml1'" do
     before do
-      TruncateHtmlHelper.flavor = 'xhtml1'
+      TruncateHtmlHelper.flavour = 'xhtml1'
     end
     
     after do
-      TruncateHtmlHelper.flavor = 'html4'
+      TruncateHtmlHelper.flavour = 'html4'
     end
     
     it "should convert ' to &apos;" do
       truncate_html("30's").should == "30&apos;s"
+    end
+    
+    it "should translate across the atlantic" do
+      TruncateHtmlHelper.flavor.should == 'xhtml1'
     end
   end
 end

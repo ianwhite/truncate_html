@@ -6,6 +6,11 @@ require "hpricot"
 module TruncateHtmlHelper
   # you may set this to either 'html4', or 'xhtml1'
   mattr_accessor :flavor
+  class << self
+    alias_method :flavour=, :flavor=
+    alias_method :flavour, :flavor
+  end
+  
   self.flavor = 'html4'
   
   # Truncates html respecting tags and html entities.
