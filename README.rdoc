@@ -1,14 +1,28 @@
-= {ianwhite}[http://github.com/ianwhite] / {truncate_html}[http://github.com/ianwhite/truncate_html]
+= {ianwhite}[http://github.com/ianwhite] / {truncate_html}[http://github.com/ianwhite/truncate_html] >{info}[http://ianwhite.github.com/truncate_html] >{api}[http://ianwhite.github.com/truncate_html/doc]
 
 TruncateHtml is just like the vanilla truncate rails helper, except it respects tags and html entities, and returns valid html.
 
 Rexml and HtmlEntities are used for the parsing.  If the input is invalid html, then hpricot is used to fix it up (but is not used when the input is fine).
 
-Inspired and heavily influenced by http://mikeburnscoder.wordpress.com/2006/11/11/truncating-html-in-ruby/ and the links contained therein.
+Inspired and heavily influenced by {this article by Mike Burns}[http://mikeburnscoder.wordpress.com/2006/11/11/truncating-html-in-ruby/] and the links contained therein.
 
-=== Dependencies
+== Usage
 
-Requires the htmlentities and hpricot gems:
+when +post.title+ is
+
+  <p>This is <em>my <strong>first</strong> post</em></p>
+
+Then
+
+  <%= truncate_html post.title, :length => 15 %>
+
+results in
+
+  <p>This is <em>my <strong>fir&hellip;</strong></em></p>
+
+== Dependencies
+
+Requires the +htmlentities+ and +hpricot+ gems:
 
   gem install htmlentities
   gem install hpricot
@@ -20,14 +34,9 @@ or - in your environment.rb file (>= rails 2.1)
   
 == Specs and Coverage
 
-* The SPECDOC lists the specifications
 * Coverage is 100% (C0)
-* CI: tested against all 2.x branches
+* CI: tested against all 2.x branches of rails
 
-RSpec is used for testing, so the tests are in <tt>spec/</tt> rather than
-<tt>test/</tt> Do rake --tasks for more details.
+RSpec is used for testing, so the tests are in +spec/+ rather than +test/+ Do rake --tasks for more details.
 
-== Continuous Integration
-
-garlic (at http://github.com/ianwhite/garlic) is used for CI.  To run the CI suite have a look at
-garlic_example.rb
+{garlic}[http://github.com/ianwhite/garlic] is used for CI.  To see what versions are tested against see {garlic.rb}[http://github.com/ianwhite/truncate_html/blob/master/garlic.rb]

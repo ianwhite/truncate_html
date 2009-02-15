@@ -40,6 +40,7 @@ begin
   task :cruise => ['garlic:all', 'doc:publish']
   
   Rake::RDocTask.new(:doc) do |d|
+    d.options << '--all'
     d.rdoc_dir = 'doc'
     d.main     = 'README.rdoc'
     d.title    = "#{PluginName} API Docs"
