@@ -1,4 +1,3 @@
-# init
-require 'ardes/truncate_html_helper'
+require 'truncate_html_helper'
 
-ActionView::Base.send :include, Ardes::TruncateHtmlHelper
+ActionView::Base.send :include, TruncateHtmlHelper

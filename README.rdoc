@@ -1,6 +1,6 @@
-= {ianwhite}[http://github.com/ianwhite] / {truncate_html}[http://github.com/truncate_html]
+= {ianwhite}[http://github.com/ianwhite] / {truncate_html}[http://github.com/ianwhite/truncate_html]
 
-Ardes::TruncateHtml is just like the vanilla truncate rails helper, except it respects tags and html entities, and returns valid html.
+TruncateHtml is just like the vanilla truncate rails helper, except it respects tags and html entities, and returns valid html.
 
 Rexml and HtmlEntities are used for the parsing.  If the input is invalid html, then hpricot is used to fix it up (but is not used when the input is fine).
 

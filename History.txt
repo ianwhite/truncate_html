@@ -1,0 +1,3 @@
+* Make API compatible with rails 2.2
+
+* Initial release

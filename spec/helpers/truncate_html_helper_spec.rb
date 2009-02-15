@@ -1,7 +1,7 @@
 require File.expand_path(File.join(File.dirname(__FILE__), '../spec_helper'))
 
-describe Ardes::TruncateHtmlHelper do
-  include Ardes::TruncateHtmlHelper
+describe TruncateHtmlHelper do
+  include TruncateHtmlHelper
   
   describe "examples from Rails doc" do
     it "'Once upon a time in a world far far away'" do
@@ -52,13 +52,13 @@ describe Ardes::TruncateHtmlHelper do
     truncate_html("30's").should == "30's"
   end
   
-  describe "when Ardes::TruncateHtmlHelper.flavour = 'xhtml1'" do
+  describe "when TruncateHtmlHelper.flavour = 'xhtml1'" do
     before do
-      Ardes::TruncateHtmlHelper.flavor = 'xhtml1'
+      TruncateHtmlHelper.flavor = 'xhtml1'
     end
     
     after do
-      Ardes::TruncateHtmlHelper.flavor = 'html4'
+      TruncateHtmlHelper.flavor = 'html4'
     end
     
     it "should convert ' to &apos;" do

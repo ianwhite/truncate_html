@@ -4,16 +4,10 @@ $LOAD_PATH.unshift(rspec_base) if File.exist?(rspec_base) and !$LOAD_PATH.includ
 
 require 'spec/rake/spectask'
 require 'spec/rake/verify_rcov'
-require 'hanna/rdoctask'
-require 'garlic/tasks'
 
 plugin_name = "truncate_html"
 
 task :default => :spec
-
-task :cruise => ['garlic:all', 'doc:push'] do
-  puts "The build is GOOD"
-end
 
 desc "Run the specs for #{plugin_name}"
 Spec::Rake::SpecTask.new(:spec) do |t|
@@ -37,50 +31,47 @@ namespace :rcov do
   end
 end
 
-task :doc => 'doc:build'
+# the following tasks are for CI and doc building, so if dependencies don't
+# exist just load these tasks
+begin
+  require 'hanna/rdoctask'
+  require 'garlic/tasks'
+  require 'grancher/task'
+  
+  task :cruise => ['garlic:all', 'doc:publish_new'] do
+    puts "The build is GOOD"
+  end
 
-namespace :doc do
-  def sha
-    `git log -1 --pretty=format:"%h"`
-  end
+  task :doc => 'doc:build'
+
+  namespace :doc do
+    def repo_sha
+      `git log -1 --pretty=format:"%h"`
+    end
   
-  Rake::RDocTask.new(:build) do |d|
-    d.rdoc_dir = 'doc'
-    d.main     = 'README.rdoc'
-    d.title    = "#{plugin_name} API Docs (#{sha})"
-    d.rdoc_files.include('README.rdoc', 'History.txt', 'License.txt', 'Todo.txt', 'lib/**/*.rb')
-  end
+    def doc_sha
+      File.read('doc/index.html').match(/<title>.*?\((\w{7})\)<\/title>/m)[1] rescue nil
+    end
+    
+    task :publish_new do
+      Rake::Task.invoke('doc:publish') if doc_sha != repo_sha
+    end
+    
+    Rake::RDocTask.new(:build) do |d|
+      d.rdoc_dir = 'doc'
+      d.main     = 'README.rdoc'
+      d.title    = "#{plugin_name} API Docs (#{repo_sha})"
+      d.rdoc_files.include('README.rdoc', 'History.txt', 'License.txt', 'Todo.txt', 'lib/**/*.rb')
+    end
   
-  task :push => 'doc:build' do
-#    if sha != `cat`
-#      
-#    mv 'doc', 'newdoc'
-#    on_gh_pages do
-#      if doc_changed_sha?('newdoc', 'doc')
-#        puts "doc has changed, pushing to gh-pages"
-#        `rm -rf doc && mv newdoc doc`
-#        `git add doc`
-#        `git commit -a -m "Update API docs"`
-#        `git push`
-#      else
-#        puts "doc is unchanged"
-#        rm_rf 'newdoc'
-#      end
-#    end
+    Grancher::Task.new(:publish) => ['doc:build'] do |g|
+      if doc_sha != repo_sha
+        g.keep 'index.html'
+        g.directory 'doc', 'doc'
+        g.branch = 'gh-pages'
+        g.push_to = 'origin'
+      end
+    end
   end
-  
-  def doc_changed_sha?(docpath1, docpath2)
-    `cat #{docpath1}/index.html | grep "<title>"` != `cat #{docpath2}/index.html | grep "<title>"`
-  end
-  
-  def on_gh_pages(&block)
-    `git branch -m gh-pages orig-gh-pages > /dev/null 2>&1`
-    `git checkout -b gh-pages origin/gh-pages`
-    `git pull`
-    yield
-  ensure
-    `git checkout master`
-    `git branch -D gh-pages`
-    `git branch -m orig-gh-pages gh-pages > /dev/null 2>&1`
-  end
+rescue LoadError
 end
