@@ -1,7 +1,4 @@
 require "rexml/parsers/pullparser"
-require 'rubygems'
-require "htmlentities"
-require "hpricot"
 
 module TruncateHtmlHelper
   # you may set this to either 'html4', or 'xhtml1'
