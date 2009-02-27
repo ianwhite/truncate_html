@@ -31,7 +31,7 @@
         </div>
         <div class='last-update'>
           Last Update:
-          <span class='datetime'>Sun Feb 15 14:46:41 +0000 2009</span>
+          <span class='datetime'>Fri Feb 27 08:30:26 +0000 2009</span>
         </div>
       </div>
       <div id='content'>
@@ -74,6 +74,11 @@
             or - in your environment.rb file (>= rails 2.1)
             </p>
             <pre>config.gem &quot;hpricot&quot;&#x000A;config.gem &quot;htmlentities&quot;</pre>
+            <p>
+            If you are on rails < 2.1, you need to explicitly include the following in
+            your environment
+            </p>
+            <pre>require 'htmlentities'&#x000A;require 'hpricot'</pre>
             <h2>Specs and Coverage</h2>
             <ul>
             <li>Coverage is 100% (C0)
