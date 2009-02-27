@@ -54,7 +54,7 @@ begin
     
     Grancher::Task.new(:push) do |g|
       g.keep_all
-      g.directory 'doc'
+      g.directory 'doc', 'doc'
       g.branch = 'gh-pages'
       g.push_to = 'origin'
     end
