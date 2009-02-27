@@ -32,6 +32,11 @@ or - in your environment.rb file (>= rails 2.1)
   config.gem "hpricot"
   config.gem "htmlentities"
   
+If you are on rails < 2.1, you need to explicitly include the following in your environment
+
+  require 'htmlentities'
+  require 'hpricot'
+  
 == Specs and Coverage
 
 * Coverage is 100% (C0)
