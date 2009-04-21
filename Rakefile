@@ -31,34 +31,41 @@ namespace :rcov do
   end
 end
 
+require 'garlic/tasks'
+
+task :integrity => 'garlic:all'
+
 # the following tasks are for CI and doc building
-begin
-  require 'hanna/rdoctask'
-  require 'garlic/tasks'
-  require 'grancher/task'
-  
-  task :cruise => ['garlic:all', 'doc:publish']
-  
-  Rake::RDocTask.new(:doc) do |d|
-    d.options << '--all'
-    d.rdoc_dir = 'doc'
-    d.main     = 'README.rdoc'
-    d.title    = "#{PluginName} API Docs"
-    d.rdoc_files.include('README.rdoc', 'History.txt', 'License.txt', 'Todo.txt', 'lib/**/*.rb')
-  end
-
-  namespace :doc do
-    task :publish => :doc do
-      Rake::Task['doc:push'].invoke unless uptodate?('.git/refs/heads/gh-pages', 'doc')
-    end
-    
-    Grancher::Task.new(:push) do |g|
-      g.keep_all
-      g.directory 'doc', 'doc'
-      g.branch = 'gh-pages'
-      g.push_to = 'origin'
-    end
-  end
-
-rescue LoadError
-end
+#begin
+#  require 'hanna/rdoctask'
+#  require 'garlic/tasks'
+#  require 'grancher/task'
+#  
+#  task :integrity => 'garlic:all'
+#  
+#  task :cruise => ['garlic:all', 'doc:publish']
+#  
+#  Rake::RDocTask.new(:doc) do |d|
+#    d.options << '--all'
+#    d.rdoc_dir = 'doc'
+#    d.main     = 'README.rdoc'
+#    d.title    = "#{PluginName} API Docs"
+#    d.rdoc_files.include('README.rdoc', 'History.txt', 'License.txt', 'Todo.txt', 'lib/**/*.rb')
+#  end
+#
+#  namespace :doc do
+#    task :publish => :doc do
+#      Rake::Task['doc:push'].invoke unless uptodate?('.git/refs/heads/gh-pages', 'doc')
+#    end
+#    
+#    Grancher::Task.new(:push) do |g|
+#      g.keep_all
+#      g.directory 'doc', 'doc'
+#      g.branch = 'gh-pages'
+#      g.push_to = 'origin'
+#    end
+#  end
+#
+#rescue LoadError
+#end
+#
