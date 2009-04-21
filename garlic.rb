@@ -17,7 +17,7 @@ garlic do
   
       run do
         cd "vendor/plugins/truncate_html" do
-          sh "rake rcov:verify"
+          sh "rake spec"
         end
       end
     end
