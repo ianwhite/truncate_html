@@ -53,7 +53,7 @@ describe TruncateHtmlHelper do
       with_length_should_equal 10, 'This is ma&hellip;'
       
       it "30, should raise the REXML error inside a TruncateHtml exception" do
-        lambda { truncate_html(@html, :length => 30) }.should raise_error(TruncateHtmlHelper::InvalidHTML)
+        lambda { truncate_html(@html, :length => 30) }.should raise_error(TruncateHtmlHelper::InvalidHtml)
       end
     end
   end

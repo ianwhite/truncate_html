@@ -2,7 +2,7 @@ require "rexml/parsers/pullparser"
 
 module TruncateHtmlHelper
   # raised when tags could not be fixed up by hpricot
-  class InvalidHTML < RuntimeError; end
+  class InvalidHtml < RuntimeError; end
   
   # you may set this to either 'html4', or 'xhtml1'
   mattr_accessor :flavor
@@ -52,7 +52,7 @@ module TruncateHtmlHelper
   
     rescue REXML::ParseException => e
       fixed_up = Hpricot(input, :fixup_tags => true).to_html
-      raise ::TruncateHtmlHelper::InvalidHTML, "Could not fixup invalid html. #{e.message}" if fixed_up == input
+      raise ::TruncateHtmlHelper::InvalidHtml, "Could not fixup invalid html. #{e.message}" if fixed_up == input
       input = fixed_up
       retry
     end

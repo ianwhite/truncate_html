@@ -2,7 +2,8 @@
 
 TruncateHtml is just like the vanilla truncate rails helper, except it respects tags and html entities, and returns valid html.
 
-Rexml and HtmlEntities are used for the parsing.  If the input is invalid html, then hpricot is used to fix it up (but is not used when the input is fine).
+Rexml and HtmlEntities are used for the parsing.  If the input is invalid html, then hpricot is used to fix it up (but is not used when the input is fine).  If the input
+cannot be fixed up, then a TruncateHtmlHelper::InvalidHtml runtime error is raised.
 
 Inspired and heavily influenced by {this article by Mike Burns}[http://mikeburnscoder.wordpress.com/2006/11/11/truncating-html-in-ruby/] and the links contained therein.
 
