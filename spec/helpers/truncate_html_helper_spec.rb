@@ -46,6 +46,13 @@ describe TruncateHtmlHelper do
       with_length_should_equal 10, '<p>Hello <strong>Worl&hellip;</strong></p>'
       with_length_should_equal 30, '<p>Hello <strong>World</strong></p><div>And Hi</div>'
     end
+    
+    describe '(incorrect) html: This is malformed</p>, length: ' do
+      before { @html = 'This is malformed</p>' }
+      
+      with_length_should_equal 10, 'This is ma&hellip;'
+      with_length_should_equal 30, 'This is malformed'
+    end
   end
   
   it "should not convert ' to &apos; (html4 compat)" do
