@@ -52,7 +52,7 @@ module TruncateHtmlHelper
   
     rescue REXML::ParseException => e
       fixed_up = Hpricot(input, :fixup_tags => true).to_html
-      raise InvalidHTML, "Could not fixup invalid html.  #{e.message}" if fixed_up == input
+      raise ::TruncateHtmlHelper::InvalidHTML, "Could not fixup invalid html. #{e.message}" if fixed_up == input
       input = fixed_up
       retry
     end
