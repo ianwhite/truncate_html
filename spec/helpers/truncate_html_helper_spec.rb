@@ -51,7 +51,10 @@ describe TruncateHtmlHelper do
       before { @html = 'This is malformed</p>' }
       
       with_length_should_equal 10, 'This is ma&hellip;'
-      with_length_should_equal 30, 'This is malformed'
+      
+      it "30, should raise the REXML error" do
+        lambda { truncate_html(@html, :length => 30) }.should raise_error(TruncateHtmlHelper::InvalidHTML)
+      end
     end
   end
   
