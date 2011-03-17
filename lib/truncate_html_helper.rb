@@ -1,7 +1,7 @@
 require "rexml/parsers/pullparser"
 
 module TruncateHtmlHelper
-  # raised when tags could not be fixed up by hpricot
+  # raised when tags could not be fixed up by nokogiri
   class InvalidHtml < RuntimeError; end
   
   # you may set this to either 'html4', or 'xhtml1'
@@ -51,7 +51,7 @@ module TruncateHtmlHelper
       output
   
     rescue REXML::ParseException => e
-      fixed_up = Hpricot(input, :fixup_tags => true).to_html
+      fixed_up = Nokogiri::HTML.fragment(input).to_html
       raise ::TruncateHtmlHelper::InvalidHtml, "Could not fixup invalid html. #{e.message}" if fixed_up == input
       input = fixed_up
       retry

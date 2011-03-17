@@ -18,4 +18,4 @@ require 'spec'
 
 # dependencies of truncate_html
 require 'htmlentities'
-require 'hpricot'
+require 'nokogiri'

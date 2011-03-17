@@ -46,16 +46,6 @@ describe TruncateHtmlHelper do
       with_length_should_equal 10, '<p>Hello <strong>Worl&hellip;</strong></p>'
       with_length_should_equal 30, '<p>Hello <strong>World</strong></p><div>And Hi</div>'
     end
-    
-    describe '(incorrect) html: This is malformed</p>, length: ' do
-      before { @html = 'This is malformed</p>' }
-      
-      with_length_should_equal 10, 'This is ma&hellip;'
-      
-      it "30, should raise the REXML error inside a TruncateHtml exception" do
-        lambda { truncate_html(@html, :length => 30) }.should raise_error(TruncateHtmlHelper::InvalidHtml)
-      end
-    end
   end
   
   it "should not convert ' to &apos; (html4 compat)" do
