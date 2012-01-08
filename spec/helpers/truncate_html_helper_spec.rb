@@ -2,7 +2,7 @@ require File.expand_path(File.join(File.dirname(__FILE__), '../spec_helper'))
 
 describe TruncateHtmlHelper do
   include TruncateHtmlHelper
-  
+
   describe "examples from Rails doc" do
     it "'Once upon a time in a world far far away'" do
       truncate_html("Once upon a time in a world far far away").should == "Once upon a time in a world fa&hellip;"
@@ -16,22 +16,22 @@ describe TruncateHtmlHelper do
       truncate_html("And they found that many people were sleeping better.", :length => 25, :omission => "(clipped)").should == "And they found that many (clipped)"
     end
   end
-  
+
   describe "use cases" do
     def self.with_length_should_equal(n, str)
       it "#{n}, should equal #{str}" do
         truncate_html(@html, :length => n).should == str
       end
     end
-  
+
     describe "html: <p>Hello <strong>World</strong></p>, length: " do
       before { @html = '<p>Hello <strong>World</strong></p>' }
-  
+
       with_length_should_equal 3, '<p>Hel&hellip;</p>'
       with_length_should_equal 7, '<p>Hello <strong>W&hellip;</strong></p>'
       with_length_should_equal 11, '<p>Hello <strong>World</strong></p>'
     end
-  
+
     describe 'html: <p>Hello &amp; <span class="foo">Goodbye</span> <br /> Hi</p>, length: ' do
       before { @html = '<p>Hello &amp; <span class="foo">Goodbye</span> <br /> Hi</p>' }
 
@@ -42,29 +42,33 @@ describe TruncateHtmlHelper do
 
     describe '(incorrect) html: <p>Hello <strong>World</p><div>And Hi, length: ' do
       before { @html = '<p>Hello <strong>World</p><div>And Hi' }
-  
+
       with_length_should_equal 10, '<p>Hello <strong>Worl&hellip;</strong></p>'
       with_length_should_equal 30, '<p>Hello <strong>World</strong></p><div>And Hi</div>'
     end
   end
-  
+
   it "should not convert ' to &apos; (html4 compat)" do
     truncate_html("30's").should == "30's"
   end
-  
+
+  it "should support chinese comma" do
+    truncate_html("年，，年，，年，，年，，年，，",6).should == "年，&hellip;"
+  end
+
   describe "when TruncateHtmlHelper.flavour = 'xhtml1'" do
     before do
       TruncateHtmlHelper.flavour = 'xhtml1'
     end
-    
+
     after do
       TruncateHtmlHelper.flavour = 'html4'
     end
-    
+
     it "should convert ' to &apos;" do
       truncate_html("30's").should == "30&apos;s"
     end
-    
+
     it "should translate across the atlantic" do
       TruncateHtmlHelper.flavor.should == 'xhtml1'
     end
